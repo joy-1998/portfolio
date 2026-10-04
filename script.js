@@ -1,8 +1,7 @@
 /**
- * JOY.DEV — Portfolio Interactive Behaviors (v2.0)
- * Includes: Touch-Responsive Canvas Network, Dynamic Typewriter,
- * Mobile Navigation Drawer, Quick-Command Terminal Chips, Architecture Modals,
- * and Clipboard Interactions.
+ * JOY.DEV — Executive Portfolio Interactive Logic
+ * Features: Lightweight ambient canvas, typewriter, CLI terminal,
+ * architecture modal inspector, mobile drawer, and clipboard copy.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. Touch-Responsive Ambient Canvas (Particles & Constellations)
+   1. Subtle Ambient Particle Canvas
    ========================================================================== */
 function initAmbientCanvas() {
   const canvas = document.getElementById('ambient-canvas');
@@ -30,7 +29,7 @@ function initAmbientCanvas() {
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
-  let pointer = { x: null, y: null, radius: 100 };
+  let pointer = { x: null, y: null, radius: 90 };
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -40,21 +39,19 @@ function initAmbientCanvas() {
 
   function createParticles() {
     particles = [];
-    // Responsive particle count (fewer on mobile to maximize battery & 60fps)
     const isMobile = width < 768;
-    const factor = isMobile ? 32000 : 18000;
+    const factor = isMobile ? 36000 : 20000;
     const count = Math.floor((width * height) / factor);
-    const particleCount = isMobile ? Math.min(Math.max(count, 18), 35) : Math.min(Math.max(count, 35), 70);
+    const particleCount = isMobile ? Math.min(Math.max(count, 15), 30) : Math.min(Math.max(count, 30), 55);
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        radius: Math.random() * 1.5 + 0.8,
-        color: Math.random() > 0.45 ? 'rgba(0, 242, 254, ' : 'rgba(157, 78, 221, ',
-        baseAlpha: Math.random() * 0.3 + 0.15
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: Math.random() * 1.3 + 0.7,
+        alpha: Math.random() * 0.25 + 0.12
       });
     }
   }
@@ -72,50 +69,36 @@ function initAmbientCanvas() {
     pointer.y = null;
   }, { passive: true });
 
-  // Passive touch support for mobile & tablet
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches && e.touches[0]) {
-      pointer.x = e.touches[0].clientX;
-      pointer.y = e.touches[0].clientY;
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => {
-    pointer.x = null;
-    pointer.y = null;
-  }, { passive: true });
-
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-
       p.x += p.vx;
       p.y += p.vy;
 
       if (p.x < 0 || p.x > width) p.vx *= -1;
       if (p.y < 0 || p.y > height) p.vy *= -1;
 
-      // Pointer magnetism
+      // Pointer interaction
       if (pointer.x !== null && pointer.y !== null) {
         const dx = pointer.x - p.x;
         const dy = pointer.y - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < pointer.radius) {
           const force = (pointer.radius - dist) / pointer.radius;
-          p.x += dx * force * 0.018;
-          p.y += dy * force * 0.018;
+          p.x += dx * force * 0.015;
+          p.y += dy * force * 0.015;
         }
       }
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `${p.color}${p.baseAlpha})`;
+      ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
       ctx.fill();
 
-      // Connect nodes
-      const maxDist = width < 768 ? 95 : 125;
+      // Connections
+      const maxDist = width < 768 ? 90 : 120;
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dx = p.x - p2.x;
@@ -123,12 +106,12 @@ function initAmbientCanvas() {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.16;
+          const alpha = (1 - dist / maxDist) * 0.14;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`;
-          ctx.lineWidth = 0.75;
+          ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+          ctx.lineWidth = 0.7;
           ctx.stroke();
         }
       }
@@ -149,10 +132,10 @@ function initTypewriter() {
 
   const phrases = [
     'Distributed Systems & High Concurrency',
-    'Resilient Cloud Microservices & gRPC',
-    'High-Throughput Event Meshes (Kafka & Redis)',
-    'Reactive & Performant Full-Stack Architecture',
-    'Automated CI/CD & Zero-Downtime Deployments'
+    'Resilient Cloud Microservices (Go & Node.js)',
+    'Event Streaming & Message Queues (Kafka / Redis)',
+    'Type-Safe Full-Stack Architecture (TypeScript / Next.js)',
+    'Automated CI/CD & Kubernetes Deployments'
   ];
 
   let phraseIndex = 0;
@@ -166,11 +149,11 @@ function initTypewriter() {
     if (isDeleting) {
       target.textContent = currentPhrase.substring(0, charIndex - 1);
       charIndex--;
-      typingSpeed = 32;
+      typingSpeed = 30;
     } else {
       target.textContent = currentPhrase.substring(0, charIndex + 1);
       charIndex++;
-      typingSpeed = 60;
+      typingSpeed = 55;
     }
 
     if (!isDeleting && charIndex === currentPhrase.length) {
@@ -192,26 +175,24 @@ function initTypewriter() {
    3. Tech Stack Matrix Filtering
    ========================================================================== */
 function initStackFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const skillCards = document.querySelectorAll('.skill-card');
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const skillTiles = document.querySelectorAll('.skill-tile');
 
-  filterBtns.forEach(btn => {
+  filterPills.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      filterPills.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const filter = btn.getAttribute('data-filter');
 
-      skillCards.forEach(card => {
-        const category = card.getAttribute('data-category');
+      skillTiles.forEach(tile => {
+        const category = tile.getAttribute('data-category');
         if (filter === 'all' || category === filter) {
-          card.style.display = 'flex';
-          card.style.opacity = '0';
-          setTimeout(() => {
-            card.style.opacity = '1';
-          }, 30);
+          tile.style.display = 'flex';
+          tile.style.opacity = '0';
+          setTimeout(() => { tile.style.opacity = '1'; }, 30);
         } else {
-          card.style.display = 'none';
+          tile.style.display = 'none';
         }
       });
     });
@@ -219,11 +200,11 @@ function initStackFilters() {
 }
 
 /* ==========================================================================
-   4. Architecture Modal / Bottom Sheet
+   4. Architecture Inspection Modal
    ========================================================================== */
 const ARCH_DATA = {
   aegis: {
-    title: 'Aegis Architecture: High-Throughput Distributed Gateway',
+    title: 'Aegis Architecture: Distributed Edge Gateway',
     diagram: `[ Client Traffic ] ---> [ Cloudflare / L4 Load Balancer ]
                                  │
                  ┌───────────────┴───────────────┐
@@ -235,7 +216,7 @@ const ARCH_DATA = {
 [ Redis Cluster (Sliding Windows) ]         [ Target Microservices (gRPC) ]
    - Rate Limit Quotas                          - Core Payment / Auth / Data
    - Token Bucket Atomic Eval                   - Circuit Breakers Active`,
-    summary: 'Aegis was designed to solve noisy-neighbor concurrency starvation across multi-tenant enterprise APIs. By offloading rate-limiting decisions to optimized atomic Lua scripts on an in-memory Redis cluster, per-request gateway overhead was throttled down to sub-1.5ms.',
+    summary: 'Aegis is an edge gateway engineered to prevent noisy-neighbor starvation across multi-tenant microservices. Leverages Redis sliding-window clusters and atomic Lua scripts for sub-millisecond route resolution.',
     highlights: [
       'Token Bucket & Sliding-Window rate limiting with sub-millisecond evaluation.',
       'Active circuit breaking with adaptive fallback routes.',
@@ -254,15 +235,15 @@ const ARCH_DATA = {
             │
             ▼
     [ PostgreSQL Store ]`,
-    summary: 'OmniSync powers bidirectional telemetry updates across globally distributed nodes. Built with Go and Kafka consumer groups to guarantee at-least-once message delivery with strict client-side idempotency.',
+    summary: 'OmniSync handles bi-directional state synchronization between distributed client nodes and backend services, leveraging Kafka consumer groups and self-healing WebSocket clusters.',
     highlights: [
       'Multi-consumer clustering with automated rebalance handling.',
-      'Zero message loss with persistent Write-Ahead Logging (WAL).',
-      'Scalable to 100k+ concurrent active socket connections.'
+      'Guaranteed message ordering with persistent Write-Ahead Logging (WAL).',
+      'Supports high concurrent active socket connections.'
     ]
   },
   nexus: {
-    title: 'Nexus Architecture: Real-Time APM Trace Visualizer',
+    title: 'Nexus Architecture: Distributed APM Trace Visualizer',
     diagram: `[ Distributed Traces ] ──► [ OpenTelemetry Collector ]
                                      │
                                      ▼
@@ -272,7 +253,7 @@ const ARCH_DATA = {
                            [ Nexus React UI ]
                     - Direct HTML5 Canvas Rendering
                     - Zero-lag 60 FPS Flame Graphs`,
-    summary: 'Legacy APM dashboards frequently freeze when rendering 500k+ telemetry points over time. Nexus bypasses the standard DOM reconciliation engine by rendering trace trees and waterfall flame graphs directly via an optimized 2D canvas pipeline.',
+    summary: 'Nexus is an observability dashboard engineered to render heavy trace trees and waterfalls over millions of points without DOM lag using an optimized 2D canvas pipeline.',
     highlights: [
       'Direct GPU-accelerated canvas rendering at 60 FPS.',
       'Aggregated microsecond trace queries via ClickHouse.',
@@ -280,7 +261,7 @@ const ARCH_DATA = {
     ]
   },
   hyperflow: {
-    title: 'HyperFlow Architecture: DAG Distributed Job Engine',
+    title: 'HyperFlow Architecture: DAG Distributed Workflow Engine',
     diagram: `[ Workflow Definition ] ──► [ DAG Compiler & Validator ]
                                     │
                                     ▼
@@ -291,10 +272,10 @@ const ARCH_DATA = {
                         └───────────┼───────────┘
                                     ▼
                         [ PostgreSQL State Log ]`,
-    summary: 'HyperFlow evaluates complex dependency graphs for asynchronous jobs with variable execution times. It maintains distributed consensus and resumes execution automatically upon node failure without rerunning idempotently completed nodes.',
+    summary: 'HyperFlow evaluates dependency graphs for asynchronous computational pipelines, maintaining state checkpoints for zero-loss recovery during worker redeployments.',
     highlights: [
       'Topological DAG task scheduling with retry policies.',
-      'State checkpointing ensuring zero lost progress during redeployments.',
+      'State checkpointing ensuring zero lost progress during failover.',
       'Pluggable worker runners for containerized tasks.'
     ]
   }
@@ -317,11 +298,11 @@ function initProjectModals() {
 
       modalTitle.textContent = data.title;
       modalContent.innerHTML = `
-        <pre class="modal-arch-diagram">${data.diagram}</pre>
-        <p style="color: var(--text-secondary); margin-bottom: 14px; font-size: 0.92rem; line-height: 1.6;">${data.summary}</p>
-        <h4 style="color: var(--accent-cyan); font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Key Architectural Decisions</h4>
-        <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 8px;">
-          ${data.highlights.map(h => `<li style="position: relative; padding-left: 18px; color: var(--text-main); font-size: 0.88rem;"><span style="position: absolute; left: 0; color: var(--accent-cyan);">▹</span>${h}</li>`).join('')}
+        <pre class="modal-pre-box">${data.diagram}</pre>
+        <p style="color: var(--text-secondary); margin-bottom: 14px; font-size: 0.91rem; line-height: 1.6;">${data.summary}</p>
+        <h4 style="color: var(--accent-cyan); font-size: 0.82rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Key Architectural Decisions</h4>
+        <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 7px;">
+          ${data.highlights.map(h => `<li style="position: relative; padding-left: 16px; color: var(--text-primary); font-size: 0.88rem;"><span style="position: absolute; left: 0; color: var(--accent-cyan);">▹</span>${h}</li>`).join('')}
         </ul>
       `;
 
@@ -329,73 +310,67 @@ function initProjectModals() {
     });
   });
 
-  closeBtn.addEventListener('click', () => {
-    modal.close();
-  });
-
+  closeBtn.addEventListener('click', () => { modal.close(); });
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.close();
-    }
+    if (e.target === modal) modal.close();
   });
 }
 
 /* ==========================================================================
-   5. Interactive CLI Terminal (with Touch Chips)
+   5. Interactive CLI Terminal
    ========================================================================== */
 function initTerminal() {
   const input = document.getElementById('terminal-input');
   const history = document.getElementById('terminal-history');
   const terminalBody = document.getElementById('terminal-body');
-  const chips = document.querySelectorAll('.term-chip');
+  const buttons = document.querySelectorAll('.term-btn');
 
   if (!input || !history) return;
 
   const commands = {
     help: () => `
 Available commands:
-  <span class="cmd-highlight">about</span>       - Print bio and architectural philosophy
-  <span class="cmd-highlight">skills</span>      - List core engineering capabilities
-  <span class="cmd-highlight">projects</span>    - Summary of flagship software architectures
-  <span class="cmd-highlight">experience</span>  - Career timeline & senior engineering impact
-  <span class="cmd-highlight">contact</span>     - Reach out via email or GitHub
-  <span class="cmd-highlight">clear</span>       - Clear terminal window
-  <span class="cmd-highlight">whoami</span>      - Current user role
-  <span class="cmd-highlight">echo &lt;msg&gt;</span>  - Echo custom argument
+  <span class="term-highlight">about</span>       - Bio & engineering philosophy
+  <span class="term-highlight">skills</span>      - Technical ecosystem & proficiencies
+  <span class="term-highlight">projects</span>    - Flagship software architectures
+  <span class="term-highlight">experience</span>  - Career milestones & leadership
+  <span class="term-highlight">contact</span>     - Direct contact & links
+  <span class="term-highlight">clear</span>       - Clear screen
+  <span class="term-highlight">whoami</span>      - Current user role
+  <span class="term-highlight">echo &lt;msg&gt;</span>  - Echo input
 `,
     about: () => `
-<span class="cmd-output-title">Joy | Senior Software Engineer & Full Stack Architect</span>
+<span class="term-block-title">Joy — Senior Software Engineer</span>
 Specializing in distributed systems, high concurrency backends (Go/TypeScript),
-and reactive web platforms. Obsessed with high uptime, type-safety, and latency reduction.
+and modern web applications. Focused on fault tolerance, clean contracts, and latency reduction.
 `,
     skills: () => `
-<span class="cmd-output-title">Core Technical Capabilities:</span>
-  • Languages: TypeScript, JavaScript, Go (Golang), Python, SQL
-  • Backend: Node.js, Express, NestJS, gRPC, REST, Kafka, Redis
-  • Frontend: React, Next.js, HTML5/CSS3, Modern Design Systems
-  • DevOps & Cloud: Docker, Kubernetes, AWS, GCP, CI/CD, Terraform
-  • Storage: PostgreSQL, Redis, ClickHouse, MongoDB
+<span class="term-block-title">Technical Capabilities:</span>
+  • Languages: TypeScript, JavaScript, Go, Python, SQL
+  • Backend: Node.js, NestJS, gRPC, REST, Kafka, Redis
+  • Frontend: React, Next.js, Modern CSS, Web Vitals
+  • Cloud & DevOps: Docker, Kubernetes, AWS, GCP, CI/CD, Terraform
+  • Storage: PostgreSQL, Redis, ClickHouse
 `,
     projects: () => `
-<span class="cmd-output-title">Flagship Architectures:</span>
-  1. <span class="cmd-highlight">Aegis</span>      - Distributed API Gateway & Token Bucket Rate Limiter (50k+ req/sec)
-  2. <span class="cmd-highlight">OmniSync</span>   - Real-time Multi-Region Event Mesh (Kafka + WebSockets)
-  3. <span class="cmd-highlight">Nexus</span>      - Distributed Telemetry & Trace Visualizer (Canvas 60 FPS)
-  4. <span class="cmd-highlight">HyperFlow</span>  - DAG Distributed Task Orchestrator (Consensus & Failover)
+<span class="term-block-title">Flagship Architectures:</span>
+  1. <span class="term-highlight">Aegis</span>      - Distributed API Gateway & Token Bucket Rate Limiter
+  2. <span class="term-highlight">OmniSync</span>   - Real-time Multi-Region Event Mesh (Kafka + WebSockets)
+  3. <span class="term-highlight">Nexus</span>      - Distributed Telemetry Visualizer (Canvas rendering)
+  4. <span class="term-highlight">HyperFlow</span>  - DAG Distributed Task Orchestrator
 `,
     experience: () => `
-<span class="cmd-output-title">Track Record:</span>
-  • 2023-Present: Senior Full Stack & Systems Engineer (Platforms & Cloud)
-  • 2021-2023:    Full Stack Software Engineer (Scale & Real-Time Sync)
-  • 2019-2021:    Software Engineer (Web Services & Developer Tooling)
+<span class="term-block-title">Career Milestones:</span>
+  • 2023-Present: Senior Full Stack & Systems Engineer
+  • 2021-2023:    Full Stack Software Engineer
+  • 2019-2021:    Software Engineer
 `,
     contact: () => `
-<span class="cmd-output-title">Direct Connection:</span>
-  • Email:  <span class="cmd-highlight">joyashwin1998@gmail.com</span>
+<span class="term-block-title">Direct Connection:</span>
+  • Email:  <span class="term-highlight">joyashwin1998@gmail.com</span>
   • GitHub: <a href="https://github.com/joy-1998" target="_blank" style="color: var(--accent-cyan);">github.com/joy-1998</a>
 `,
-    whoami: () => `guest@portfolio (Permissions: Read-Only System Inspector)`,
-    sudo: () => `<span style="color: #ff5f56;">Permission denied: You are already a guest of honor!</span>`
+    whoami: () => `guest@portfolio (Permissions: Read-Only Inspector)`
   };
 
   function executeCommand(rawInput) {
@@ -408,7 +383,7 @@ and reactive web platforms. Obsessed with high uptime, type-safety, and latency 
 
     const cmdLine = document.createElement('div');
     cmdLine.className = 'terminal-line';
-    cmdLine.innerHTML = `<span class="prompt-user">joy@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span class="prompt-char">$</span> ${escapeHTML(trimmed)}`;
+    cmdLine.innerHTML = `<span class="prompt-user">joy@dev</span><span class="prompt-colon">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$</span> ${escapeHTML(trimmed)}`;
     history.appendChild(cmdLine);
 
     if (cmd === 'clear') {
@@ -426,7 +401,7 @@ and reactive web platforms. Obsessed with high uptime, type-safety, and latency 
     } else {
       const outLine = document.createElement('div');
       outLine.className = 'terminal-line';
-      outLine.innerHTML = `zsh: command not found: <span style="color: #ff5f56;">${escapeHTML(cmd)}</span>. Type <span class="cmd-highlight">help</span> for commands.`;
+      outLine.innerHTML = `zsh: command not found: <span style="color: #ff5f56;">${escapeHTML(cmd)}</span>. Type <span class="term-highlight">help</span> for commands.`;
       history.appendChild(outLine);
     }
 
@@ -434,36 +409,26 @@ and reactive web platforms. Obsessed with high uptime, type-safety, and latency 
     terminalBody.scrollTop = terminalBody.scrollHeight;
   }
 
-  // Handle typing + enter
   input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      executeCommand(input.value);
-    }
+    if (e.key === 'Enter') executeCommand(input.value);
   });
 
-  // Handle quick command chips (touch friendly)
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const cmd = chip.getAttribute('data-cmd');
-      if (cmd) {
-        executeCommand(cmd);
-      }
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (cmd) executeCommand(cmd);
     });
   });
 
-  terminalBody.addEventListener('click', () => {
-    input.focus();
-  });
+  terminalBody.addEventListener('click', () => { input.focus(); });
 }
 
 function escapeHTML(str) {
-  return str.replace(/[&<>'"]/g, 
-    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-  );
+  return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
 }
 
 /* ==========================================================================
-   6. Copy to Clipboard & Toast
+   6. Copy Email & Toast
    ========================================================================== */
 function initCopyEmail() {
   const copyBtn = document.getElementById('copy-email-btn');
@@ -478,9 +443,7 @@ function initCopyEmail() {
       await navigator.clipboard.writeText(email);
       if (tooltip) tooltip.textContent = 'Copied!';
       showToast(`Copied ${email} to clipboard!`);
-      setTimeout(() => {
-        if (tooltip) tooltip.textContent = 'Copy';
-      }, 2000);
+      setTimeout(() => { if (tooltip) tooltip.textContent = 'Copy'; }, 2000);
     } catch {
       showToast(`Email: ${email}`);
     }
@@ -490,14 +453,12 @@ function initCopyEmail() {
     if (!toast) return;
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2800);
+    setTimeout(() => { toast.classList.remove('show'); }, 2600);
   }
 }
 
 /* ==========================================================================
-   7. Mobile Navigation Drawer & Backdrop
+   7. Mobile Navigation Drawer
    ========================================================================== */
 function initMobileDrawer() {
   const mobileToggle = document.getElementById('mobile-toggle');
@@ -513,7 +474,7 @@ function initMobileDrawer() {
     overlay.classList.add('active');
     mobileToggle.classList.add('active');
     mobileToggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden'; // prevent background scrolling
+    document.body.style.overflow = 'hidden';
   }
 
   function closeDrawer() {
@@ -525,23 +486,17 @@ function initMobileDrawer() {
   }
 
   mobileToggle.addEventListener('click', () => {
-    if (drawer.classList.contains('active')) {
-      closeDrawer();
-    } else {
-      openDrawer();
-    }
+    if (drawer.classList.contains('active')) closeDrawer();
+    else openDrawer();
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
   overlay.addEventListener('click', closeDrawer);
-
-  drawerLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
-  });
+  drawerLinks.forEach(link => { link.addEventListener('click', closeDrawer); });
 }
 
 /* ==========================================================================
-   8. Scroll Spy for Desktop Navbar
+   8. Scroll Spy for Desktop
    ========================================================================== */
 function initScrollSpy() {
   const navLinks = document.querySelectorAll('.nav-links .nav-link');
@@ -554,11 +509,8 @@ function initScrollSpy() {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
         navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
+          if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+          else link.classList.remove('active');
         });
       }
     });
