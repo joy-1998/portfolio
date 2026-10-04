@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joy | Senior Software Engineer & Full Stack Architect</title>
+  <meta name="description" content="Portfolio of Joy - Senior Software Engineer & Full Stack Developer specializing in distributed systems, scalable web architecture, and cloud infrastructure.">
+  <meta name="keywords" content="Senior Software Engineer, Full Stack Developer, Distributed Systems, Cloud Architecture, Joy, GitHub Pages">
+  <meta name="author" content="Joy">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Joy | Senior Software Engineer & Full Stack Architect">
+  <meta property="og:description" content="Senior Software Engineer specializing in resilient systems, microservices, and modern web applications.">
+  <meta property="og:url" content="https://joy-1998.github.io/portfolio/">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Canvas interactive background -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Noise overlay for refined dark texture -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Floating Glass Navigation Dock -->
+  <header class="header-dock" id="navbar">
+    <div class="nav-container glass-card">
+      <a href="#hero" class="nav-brand" aria-label="Home">
+        <span class="brand-bracket">&lt;</span><span class="brand-name">JOY</span><span class="brand-accent">.DEV</span><span class="brand-bracket">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Stack</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#terminal" class="nav-link terminal-nav-btn">Terminal</a>
+        <a href="#contact" class="nav-link contact-pill">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/joy-1998" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub Profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="hero-container">
+        <!-- Status Badge -->
+        <div class="status-pill glass-card animate-fade-in">
+          <span class="pulse-dot"></span>
+          <span class="status-text">Available for Senior Engineering Roles & Architecture Consulting</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="hero-title animate-fade-in delay-1">
+          Architecting Resilient Systems.<br>
+          <span class="gradient-text">Engineering Full-Stack Precision.</span>
+        </h1>
+
+        <!-- Dynamic Typing Subtitle -->
+        <div class="hero-dynamic-subtitle animate-fade-in delay-2">
+          <span class="code-bracket">$</span> <span id="typewriter-text" class="typewriter">Distributed Systems & High Concurrency</span><span class="cursor">_</span>
+        </div>
+
+        <!-- Bio Brief -->
+        <p class="hero-description animate-fade-in delay-3">
+          I am <strong>Joy</strong>, a Senior Software Engineer specializing in scalable cloud microservices, reactive frontend architectures, and high-throughput data backends. Turning complex system requirements into elegant, deterministic software.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="hero-actions animate-fade-in delay-4">
+          <a href="#projects" class="btn btn-primary glow-button">
+            <span>Explore Engineering Work</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary glass-btn">
+            <span>Get in Touch</span>
+          </a>
+          <a href="#terminal" class="btn btn-tertiary">
+            <span class="cli-icon">>_</span> <span>Interactive CLI</span>
+          </a>
+        </div>
+
+        <!-- Core Metric Counters -->
+        <div class="metrics-grid glass-card animate-fade-in delay-5">
+          <div class="metric-item">
+            <div class="metric-number"><span class="counter" data-target="99.99">99.99</span>%</div>
+            <div class="metric-label">System Availability Target</div>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <div class="metric-number"><span class="counter" data-target="50">50</span>k+</div>
+            <div class="metric-label">Req/Sec Throughput Tuned</div>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <div class="metric-number">&lt;<span class="counter" data-target="25">25</span>ms</div>
+            <div class="metric-label">p95 Latency Standards</div>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <div class="metric-number"><span class="counter" data-target="100">100</span>%</div>
+            <div class="metric-label">Automated CI/CD Quality</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engineering Philosophy & Pillars -->
+    <section id="about" class="section-padding">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-tag">ENGINEERING APPROACH</div>
+          <h2 class="section-title">Built on First Principles</h2>
+          <p class="section-subtitle">Senior engineering isn't just writing code—it's managing tradeoffs, scaling distributed workloads, and building maintainable team ecosystems.</p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card glass-card hover-glow">
+            <div class="card-icon-wrapper cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Distributed Systems & Concurrency</h3>
+            <p class="pillar-desc">Designing fault-tolerant architectures utilizing asynchronous event meshes, distributed locking, idempotent message queues, and horizontal autoscaling.</p>
+            <div class="pillar-tags">
+              <span>Kafka</span><span>Redis</span><span>gRPC</span><span>Microservices</span>
+            </div>
+          </div>
+
+          <div class="pillar-card glass-card hover-glow">
+            <div class="card-icon-wrapper purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Cloud Native & Infrastructure</h3>
+            <p class="pillar-desc">Provisioning immutable infrastructure via Terraform, orchestrating Kubernetes workloads, and embedding comprehensive observability (telemetry, tracing, APM).</p>
+            <div class="pillar-tags">
+              <span>Docker</span><span>K8s</span><span>Terraform</span><span>Prometheus</span>
+            </div>
+          </div>
+
+          <div class="pillar-card glass-card hover-glow">
+            <div class="card-icon-wrapper emerald">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Modern Full-Stack Applications</h3>
+            <p class="pillar-desc">Building lightning-fast, accessible user interfaces with reactive frameworks, type-safe APIs, state sync protocols, and zero-compromise UX fluidity.</p>
+            <div class="pillar-tags">
+              <span>TypeScript</span><span>React / Next.js</span><span>Node.js</span><span>GraphQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Matrix -->
+    <section id="skills" class="section-padding bg-alt">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-tag">COMPETENCIES & ECOSYSTEM</div>
+          <h2 class="section-title">Technical Matrix</h2>
+          <p class="section-subtitle">A balanced toolkit cultivated across backend services, cloud platforms, and modern web environments.</p>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="stack-filters" role="tablist">
+          <button class="filter-btn active" data-filter="all" role="tab">All Domains</button>
+          <button class="filter-btn" data-filter="languages" role="tab">Languages</button>
+          <button class="filter-btn" data-filter="backend" role="tab">Backend & Data</button>
+          <button class="filter-btn" data-filter="frontend" role="tab">Frontend</button>
+          <button class="filter-btn" data-filter="devops" role="tab">Cloud & DevOps</button>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="stack-grid" id="stack-container">
+          <!-- Item -->
+          <div class="skill-card glass-card" data-category="languages">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">TypeScript / JavaScript</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <span class="skill-badge">Core</span>
+            </div>
+            <p class="skill-details">Strict type systems, asynchronous event loops, AST tooling, and performance optimization.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 95%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="languages">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">Go (Golang)</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <span class="skill-badge">High Concurrency</span>
+            </div>
+            <p class="skill-details">Goroutines, channels, gRPC microservices, low memory footprint services, and network daemons.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 90%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="languages">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">Python</span>
+                <span class="skill-level">Proficient</span>
+              </div>
+              <span class="skill-badge">Backend / Automation</span>
+            </div>
+            <p class="skill-details">FastAPI, asynchronous event handling, data processing pipelines, and AI/ML orchestration.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 88%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="backend">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">Node.js & Express / NestJS</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <span class="skill-badge">Microservices</span>
+            </div>
+            <p class="skill-details">Clustering, worker threads, stream processing, middleware pipelines, and enterprise APIs.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 96%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="backend">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">PostgreSQL & Distributed SQL</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <span class="skill-badge">RDBMS</span>
+            </div>
+            <p class="skill-details">Query query planner optimization, indexing strategies (B-Tree, GIN, BRIN), schema partitioning, and pooling.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 92%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="backend">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">Kafka & Redis Pub/Sub</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <span class="skill-badge">Streaming & Cache</span>
+            </div>
+            <p class="skill-details">Consumer groups, partitioning, exactly-once semantics, distributed cache invalidation, and rate limiting.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 90%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="frontend">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">React & Next.js Ecosystem</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <span class="skill-badge">UI Architecture</span>
+            </div>
+            <p class="skill-details">Server Components, SSR/SSG, optimistic updates, state reconciliation, and Web Vitals perfection.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 94%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="frontend">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">Modern CSS & Design Systems</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <span class="skill-badge">Styling & A11y</span>
+            </div>
+            <p class="skill-details">Glassmorphic UI, responsive fluid design, CSS custom properties, WCAG 2.1 AA compliance, animations.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 95%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="devops">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">Docker & Kubernetes (K8s)</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <span class="skill-badge">Orchestration</span>
+            </div>
+            <p class="skill-details">Multi-stage container builds, Helm charts, ingress controllers, rolling deployments, horizontal pod autoscalers.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 88%"></div></div>
+          </div>
+
+          <div class="skill-card glass-card" data-category="devops">
+            <div class="skill-head">
+              <div class="skill-meta">
+                <span class="skill-name">CI/CD & Cloud (AWS / GCP)</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <span class="skill-badge">Delivery</span>
+            </div>
+            <p class="skill-details">GitHub Actions pipelines, Terraform IaC, serverless edge functions, security scanning, and zero-downtime releases.</p>
+            <div class="skill-meter"><div class="meter-bar" style="width: 90%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flagship Projects Section -->
+    <section id="projects" class="section-padding">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-tag">ENGINEERING SHOWCASE</div>
+          <h2 class="section-title">Flagship Architectures</h2>
+          <p class="section-subtitle">Real-world systems engineered for scale, reliability, and developer experience.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card glass-card hover-glow">
+            <div class="project-header">
+              <div class="project-status">Production Grade</div>
+              <div class="project-stars">★ High Concurrency</div>
+            </div>
+            <h3 class="project-title">Aegis: Distributed API Gateway & Token Bucket Rate Limiter</h3>
+            <p class="project-desc">
+              High-throughput edge gateway providing sub-millisecond route resolution, adaptive distributed rate-limiting via Redis sliding windows, and automatic circuit breaking.
+            </p>
+            <div class="project-specs">
+              <div class="spec-item"><span class="spec-label">Throughput:</span> <span class="spec-val">50k+ req/sec</span></div>
+              <div class="spec-item"><span class="spec-label">p99 Latency:</span> <span class="spec-val">&lt;3.2ms</span></div>
+              <div class="spec-item"><span class="spec-label">Resilience:</span> <span class="spec-val">Distributed Fallback</span></div>
+            </div>
+            <div class="tech-pill-list">
+              <span class="tech-pill">Go</span>
+              <span class="tech-pill">Redis</span>
+              <span class="tech-pill">Docker</span>
+              <span class="tech-pill">gRPC</span>
+              <span class="tech-pill">Prometheus</span>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-sm btn-secondary view-arch-btn" data-project="aegis">Inspect Architecture</button>
+              <a href="https://github.com/joy-1998/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link">
+                <span>Source</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card glass-card hover-glow">
+            <div class="project-header">
+              <div class="project-status">Event-Driven</div>
+              <div class="project-stars">★ Sub-20ms Sync</div>
+            </div>
+            <h3 class="project-title">OmniSync: Multi-Region Real-Time Event Mesh</h3>
+            <p class="project-desc">
+              Resilient message bus and state synchronizer using Kafka partitions and WebSocket clusters to deliver bi-directional telemetry across millions of connected clients.
+            </p>
+            <div class="project-specs">
+              <div class="spec-item"><span class="spec-label">Connections:</span> <span class="spec-val">100k Concurrent</span></div>
+              <div class="spec-item"><span class="spec-label">Guarantee:</span> <span class="spec-val">At-least-once with dedup</span></div>
+              <div class="spec-item"><span class="spec-label">Recovery:</span> <span class="spec-val">Self-healing brokers</span></div>
+            </div>
+            <div class="tech-pill-list">
+              <span class="tech-pill">TypeScript</span>
+              <span class="tech-pill">Kafka</span>
+              <span class="tech-pill">Node.js</span>
+              <span class="tech-pill">WebSockets</span>
+              <span class="tech-pill">Kubernetes</span>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-sm btn-secondary view-arch-btn" data-project="omnisync">Inspect Architecture</button>
+              <a href="https://github.com/joy-1998/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link">
+                <span>Source</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card glass-card hover-glow">
+            <div class="project-header">
+              <div class="project-status">Full-Stack APM</div>
+              <div class="project-stars">★ Canvas Rendering</div>
+            </div>
+            <h3 class="project-title">Nexus: Distributed Telemetry & Trace Visualizer</h3>
+            <p class="project-desc">
+              High-performance observability dashboard rendering flame graphs, distributed span waterfalls, and live metrics using optimized HTML5 Canvas and WebGL without DOM lag.
+            </p>
+            <div class="project-specs">
+              <div class="spec-item"><span class="spec-label">FPS:</span> <span class="spec-val">60 FPS on 1M points</span></div>
+              <div class="spec-item"><span class="spec-label">Data Engine:</span> <span class="spec-val">ClickHouse columnar</span></div>
+              <div class="spec-item"><span class="spec-label">UI:</span> <span class="spec-val">Zero-lag virtualization</span></div>
+            </div>
+            <div class="tech-pill-list">
+              <span class="tech-pill">React</span>
+              <span class="tech-pill">Canvas / WebGL</span>
+              <span class="tech-pill">ClickHouse</span>
+              <span class="tech-pill">OpenTelemetry</span>
+              <span class="tech-pill">Tailwind</span>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-sm btn-secondary view-arch-btn" data-project="nexus">Inspect Architecture</button>
+              <a href="https://github.com/joy-1998/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link">
+                <span>Source</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card glass-card hover-glow">
+            <div class="project-header">
+              <div class="project-status">Distributed Engine</div>
+              <div class="project-stars">★ Zero Data Loss</div>
+            </div>
+            <h3 class="project-title">HyperFlow: Resilient Distributed Workflow Orchestrator</h3>
+            <p class="project-desc">
+              DAG-based workflow execution engine managing long-running computational steps, dynamic retry policies, state checkpoints, and zero-downtime worker node migration.
+            </p>
+            <div class="project-specs">
+              <div class="spec-item"><span class="spec-label">Failover:</span> <span class="spec-val">Automatic consensus</span></div>
+              <div class="spec-item"><span class="spec-label">Persistence:</span> <span class="spec-val">WAL + PostgreSQL</span></div>
+              <div class="spec-item"><span class="spec-label">Integrations:</span> <span class="spec-val">Cloud Events & Webhooks</span></div>
+            </div>
+            <div class="tech-pill-list">
+              <span class="tech-pill">Go</span>
+              <span class="tech-pill">PostgreSQL</span>
+              <span class="tech-pill">Docker</span>
+              <span class="tech-pill">Terraform</span>
+              <span class="tech-pill">AWS ECS</span>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-sm btn-secondary view-arch-btn" data-project="hyperflow">Inspect Architecture</button>
+              <a href="https://github.com/joy-1998/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-link">
+                <span>Source</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Career & Impact Timeline -->
+    <section id="experience" class="section-padding bg-alt">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-tag">LEADERSHIP & TRACK RECORD</div>
+          <h2 class="section-title">Career Milestones</h2>
+          <p class="section-subtitle">Progressive journey architecting products, scaling teams, and driving operational excellence.</p>
+        </div>
+
+        <div class="timeline-container">
+          <!-- Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-card">
+              <div class="timeline-badge">2023 — Present</div>
+              <h3 class="timeline-role">Senior Full Stack & Systems Engineer</h3>
+              <div class="timeline-company">Enterprise Platforms & Cloud Architecture</div>
+              <p class="timeline-desc">
+                Spearheaded the redesign of core microservice backends, reducing end-to-end API latencies by 42%. Established CI/CD deployment standards across 12 product teams and championed type-safety and contract testing.
+              </p>
+              <ul class="timeline-bullets">
+                <li>Architected distributed caching layers saving $180k/year in cloud database over-provisioning.</li>
+                <li>Led cross-functional migration to containerized Kubernetes deployments with zero client downtime.</li>
+                <li>Mentored junior and mid-level engineers in distributed system patterns and observability.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-card">
+              <div class="timeline-badge">2021 — 2023</div>
+              <h3 class="timeline-role">Full Stack Software Engineer</h3>
+              <div class="timeline-company">High-Growth Scaled Products</div>
+              <p class="timeline-desc">
+                Engineered consumer-facing web applications using Next.js and Go microservices. Scaled real-time messaging subsystems to support tens of thousands of simultaneous users.
+              </p>
+              <ul class="timeline-bullets">
+                <li>Built real-time push notification pipelines using WebSockets and Redis Pub/Sub.</li>
+                <li>Refactored legacy REST APIs into unified GraphQL services, shrinking network payload sizes by 35%.</li>
+                <li>Achieved 95+ Google Lighthouse scores across core user touchpoints.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-card">
+              <div class="timeline-badge">2019 — 2021</div>
+              <h3 class="timeline-role">Software Engineer</h3>
+              <div class="timeline-company">Web & Distributed Applications</div>
+              <p class="timeline-desc">
+                Developed web services, database persistence layers, and automated verification suites. Built intuitive administrative portals and internal developer tooling.
+              </p>
+              <ul class="timeline-bullets">
+                <li>Automated integration testing and database schema migrations with zero rollbacks.</li>
+                <li>Developed modular component design systems adopted by multiple frontend applications.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Terminal Section -->
+    <section id="terminal" class="section-padding">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-tag">CLI EXPERIENCE</div>
+          <h2 class="section-title">Interactive Terminal</h2>
+          <p class="section-subtitle">For engineers who prefer the command line. Type commands below to inspect capabilities.</p>
+        </div>
+
+        <div class="terminal-window glass-card">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="terminal-title">joy@system-core:~ (zsh)</div>
+            <div class="terminal-actions">
+              <span class="terminal-pill">Live Shell Emulator</span>
+            </div>
+          </div>
+
+          <div class="terminal-body" id="terminal-body">
+            <div class="terminal-line text-muted">Joy's Interactive Portfolio Shell v2.4</div>
+            <div class="terminal-line text-muted">Type <span class="cmd-highlight">help</span> to list available commands, or try <span class="cmd-highlight">skills</span>, <span class="cmd-highlight">projects</span>, <span class="cmd-highlight">contact</span>.</div>
+            <div id="terminal-history"></div>
+            
+            <div class="terminal-prompt-line">
+              <span class="prompt-user">joy@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span class="prompt-char">$</span>
+              <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" autofocus aria-label="Terminal command prompt">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Connect Section -->
+    <section id="contact" class="section-padding bg-alt">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="section-tag">INITIATE DIALOGUE</div>
+          <h2 class="section-title">Let's Build Together</h2>
+          <p class="section-subtitle">Interested in discussing distributed systems, architecture challenges, or senior technical leadership? My inbox is always open.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Card -->
+          <div class="contact-info-card glass-card">
+            <h3 class="contact-card-title">Direct Connection</h3>
+            <p class="contact-card-text">Whether you have an upcoming project, a high-scale architecture problem, or an engineering role, feel free to reach out directly.</p>
+            
+            <div class="contact-methods">
+              <div class="contact-method-item">
+                <div class="method-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="method-details">
+                  <span class="method-label">Direct Email</span>
+                  <div class="copy-email-row">
+                    <a href="mailto:joyashwin1998@gmail.com" class="method-value">joyashwin1998@gmail.com</a>
+                    <button id="copy-email-btn" class="copy-btn" title="Copy to clipboard">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      <span id="copy-tooltip">Copy</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-method-item">
+                <div class="method-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                </div>
+                <div class="method-details">
+                  <span class="method-label">GitHub</span>
+                  <a href="https://github.com/joy-1998" target="_blank" rel="noopener noreferrer" class="method-value">github.com/joy-1998</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="availability-status">
+              <span class="status-indicator"></span>
+              <span>Open to full-time remote senior roles, tech lead opportunities, and consulting.</span>
+            </div>
+          </div>
+
+          <!-- Quick Message Box -->
+          <div class="contact-form-card glass-card">
+            <h3 class="contact-card-title">Send a Quick Dispatch</h3>
+            <form id="contact-form" class="contact-form" onsubmit="event.preventDefault(); window.location.href='mailto:joyashwin1998@gmail.com?subject=' + encodeURIComponent(document.getElementById('form-subject').value) + '&body=' + encodeURIComponent('From: ' + document.getElementById('form-name').value + ' (' + document.getElementById('form-email').value + ')\n\n' + document.getElementById('form-msg').value);">
+              <div class="form-group">
+                <label for="form-name" class="form-label">Your Name</label>
+                <input type="text" id="form-name" class="form-input" placeholder="e.g. Linus Torvalds" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email" class="form-label">Your Email</label>
+                <input type="email" id="form-email" class="form-input" placeholder="name@company.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-subject" class="form-label">Subject</label>
+                <input type="text" id="form-subject" class="form-input" placeholder="Senior Engineering / Architecture Inquiry" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-msg" class="form-label">Message</label>
+                <textarea id="form-msg" rows="4" class="form-input form-textarea" placeholder="Tell me about your product, mission, or challenge..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary glow-button w-full">
+                <span>Dispatch Message via Email</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Architecture Modal -->
+  <dialog id="arch-modal" class="arch-modal glass-card" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <h3 id="modal-title" class="modal-title">System Architecture Inspection</h3>
+      <button id="close-modal-btn" class="modal-close" aria-label="Close dialog">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-content">
+      <!-- Dynamic populated content -->
+    </div>
+  </dialog>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">&lt;JOY.DEV/&gt;</div>
+        <p class="footer-copy">Designed & Engineered with vanilla modern web standards. Hosted on GitHub Pages.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#hero">Back to top</a>
+        <a href="https://github.com/joy-1998" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:joyashwin1998@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
