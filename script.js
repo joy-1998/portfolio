@@ -1,7 +1,8 @@
 /**
- * JOY.DEV — Portfolio Interactive Behaviors
- * Includes: Ambient Particle Network, Typewriter Engine, Interactive CLI Terminal,
- * Architecture Inspection Modal, Copy to Clipboard, and Accessible Navigation.
+ * JOY.DEV — Portfolio Interactive Behaviors (v2.0)
+ * Includes: Touch-Responsive Canvas Network, Dynamic Typewriter,
+ * Mobile Navigation Drawer, Quick-Command Terminal Chips, Architecture Modals,
+ * and Clipboard Interactions.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,17 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectModals();
   initTerminal();
   initCopyEmail();
-  initNavigation();
+  initMobileDrawer();
+  initScrollSpy();
 });
 
 /* ==========================================================================
-   1. Ambient Interactive Canvas (Constellation / Network Particles)
+   1. Touch-Responsive Ambient Canvas (Particles & Constellations)
    ========================================================================== */
 function initAmbientCanvas() {
   const canvas = document.getElementById('ambient-canvas');
   if (!canvas) return;
 
-  // Respect reduced-motion preferences
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
@@ -29,7 +30,7 @@ function initAmbientCanvas() {
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
-  let mouse = { x: null, y: null, radius: 120 };
+  let pointer = { x: null, y: null, radius: 100 };
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -39,59 +40,72 @@ function initAmbientCanvas() {
 
   function createParticles() {
     particles = [];
-    // Number of particles responsive to screen size
-    const count = Math.floor((width * height) / 18000);
-    const particleCount = Math.min(Math.max(count, 35), 75);
+    // Responsive particle count (fewer on mobile to maximize battery & 60fps)
+    const isMobile = width < 768;
+    const factor = isMobile ? 32000 : 18000;
+    const count = Math.floor((width * height) / factor);
+    const particleCount = isMobile ? Math.min(Math.max(count, 18), 35) : Math.min(Math.max(count, 35), 70);
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 1.6 + 0.8,
-        color: Math.random() > 0.4 ? 'rgba(0, 242, 254, ' : 'rgba(157, 78, 221, ',
-        baseAlpha: Math.random() * 0.35 + 0.15
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.5 + 0.8,
+        color: Math.random() > 0.45 ? 'rgba(0, 242, 254, ' : 'rgba(157, 78, 221, ',
+        baseAlpha: Math.random() * 0.3 + 0.15
       });
     }
   }
 
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, { passive: true });
   resize();
 
   window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+  }, { passive: true });
 
   window.addEventListener('mouseleave', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
+    pointer.x = null;
+    pointer.y = null;
+  }, { passive: true });
+
+  // Passive touch support for mobile & tablet
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      pointer.x = e.touches[0].clientX;
+      pointer.y = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    pointer.x = null;
+    pointer.y = null;
+  }, { passive: true });
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
-    // Update & draw particles
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
       p.x += p.vx;
       p.y += p.vy;
 
-      // Bounce on edges
       if (p.x < 0 || p.x > width) p.vx *= -1;
       if (p.y < 0 || p.y > height) p.vy *= -1;
 
-      // Mouse magnetism
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
+      // Pointer magnetism
+      if (pointer.x !== null && pointer.y !== null) {
+        const dx = pointer.x - p.x;
+        const dy = pointer.y - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          p.x += dx * force * 0.02;
-          p.y += dy * force * 0.02;
+        if (dist < pointer.radius) {
+          const force = (pointer.radius - dist) / pointer.radius;
+          p.x += dx * force * 0.018;
+          p.y += dy * force * 0.018;
         }
       }
 
@@ -100,20 +114,21 @@ function initAmbientCanvas() {
       ctx.fillStyle = `${p.color}${p.baseAlpha})`;
       ctx.fill();
 
-      // Connect adjacent particles
+      // Connect nodes
+      const maxDist = width < 768 ? 95 : 125;
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dx = p.x - p2.x;
         const dy = p.y - p2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 130) {
-          const alpha = (1 - dist / 130) * 0.18;
+        if (dist < maxDist) {
+          const alpha = (1 - dist / maxDist) * 0.16;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
           ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`;
-          ctx.lineWidth = 0.8;
+          ctx.lineWidth = 0.75;
           ctx.stroke();
         }
       }
@@ -126,7 +141,7 @@ function initAmbientCanvas() {
 }
 
 /* ==========================================================================
-   2. Dynamic Typewriter Effect
+   2. Dynamic Typewriter
    ========================================================================== */
 function initTypewriter() {
   const target = document.getElementById('typewriter-text');
@@ -143,7 +158,7 @@ function initTypewriter() {
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-  let typingSpeed = 70;
+  let typingSpeed = 65;
 
   function typeCycle() {
     const currentPhrase = phrases[phraseIndex];
@@ -151,21 +166,20 @@ function initTypewriter() {
     if (isDeleting) {
       target.textContent = currentPhrase.substring(0, charIndex - 1);
       charIndex--;
-      typingSpeed = 35;
+      typingSpeed = 32;
     } else {
       target.textContent = currentPhrase.substring(0, charIndex + 1);
       charIndex++;
-      typingSpeed = 65;
+      typingSpeed = 60;
     }
 
     if (!isDeleting && charIndex === currentPhrase.length) {
-      // Pause at full sentence
       typingSpeed = 2200;
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      typingSpeed = 500;
+      typingSpeed = 450;
     }
 
     setTimeout(typeCycle, typingSpeed);
@@ -195,7 +209,7 @@ function initStackFilters() {
           card.style.opacity = '0';
           setTimeout(() => {
             card.style.opacity = '1';
-          }, 40);
+          }, 30);
         } else {
           card.style.display = 'none';
         }
@@ -205,7 +219,7 @@ function initStackFilters() {
 }
 
 /* ==========================================================================
-   4. Architecture Deep-Dive Dialog / Modal
+   4. Architecture Modal / Bottom Sheet
    ========================================================================== */
 const ARCH_DATA = {
   aegis: {
@@ -304,10 +318,10 @@ function initProjectModals() {
       modalTitle.textContent = data.title;
       modalContent.innerHTML = `
         <pre class="modal-arch-diagram">${data.diagram}</pre>
-        <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.95rem; line-height: 1.6;">${data.summary}</p>
-        <h4 style="color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Key Architectural Decisions</h4>
+        <p style="color: var(--text-secondary); margin-bottom: 14px; font-size: 0.92rem; line-height: 1.6;">${data.summary}</p>
+        <h4 style="color: var(--accent-cyan); font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Key Architectural Decisions</h4>
         <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 8px;">
-          ${data.highlights.map(h => `<li style="position: relative; padding-left: 18px; color: var(--text-main); font-size: 0.9rem;"><span style="position: absolute; left: 0; color: var(--accent-cyan);">▹</span>${h}</li>`).join('')}
+          ${data.highlights.map(h => `<li style="position: relative; padding-left: 18px; color: var(--text-main); font-size: 0.88rem;"><span style="position: absolute; left: 0; color: var(--accent-cyan);">▹</span>${h}</li>`).join('')}
         </ul>
       `;
 
@@ -327,12 +341,13 @@ function initProjectModals() {
 }
 
 /* ==========================================================================
-   5. Interactive CLI Terminal
+   5. Interactive CLI Terminal (with Touch Chips)
    ========================================================================== */
 function initTerminal() {
   const input = document.getElementById('terminal-input');
   const history = document.getElementById('terminal-history');
   const terminalBody = document.getElementById('terminal-body');
+  const chips = document.querySelectorAll('.term-chip');
 
   if (!input || !history) return;
 
@@ -380,50 +395,62 @@ and reactive web platforms. Obsessed with high uptime, type-safety, and latency 
   • GitHub: <a href="https://github.com/joy-1998" target="_blank" style="color: var(--accent-cyan);">github.com/joy-1998</a>
 `,
     whoami: () => `guest@portfolio (Permissions: Read-Only System Inspector)`,
-    sudo: () => `<span style="color: #ff5f56;">Permission denied: Nice try! You are already a guest of honor.</span>`
+    sudo: () => `<span style="color: #ff5f56;">Permission denied: You are already a guest of honor!</span>`
   };
 
+  function executeCommand(rawInput) {
+    const trimmed = rawInput.trim();
+    if (!trimmed) return;
+
+    const args = trimmed.split(' ');
+    const cmd = args[0].toLowerCase();
+    const param = args.slice(1).join(' ');
+
+    const cmdLine = document.createElement('div');
+    cmdLine.className = 'terminal-line';
+    cmdLine.innerHTML = `<span class="prompt-user">joy@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span class="prompt-char">$</span> ${escapeHTML(trimmed)}`;
+    history.appendChild(cmdLine);
+
+    if (cmd === 'clear') {
+      history.innerHTML = '';
+    } else if (cmd === 'echo') {
+      const outLine = document.createElement('div');
+      outLine.className = 'terminal-line';
+      outLine.textContent = param;
+      history.appendChild(outLine);
+    } else if (commands[cmd]) {
+      const outLine = document.createElement('div');
+      outLine.className = 'terminal-line';
+      outLine.innerHTML = commands[cmd]();
+      history.appendChild(outLine);
+    } else {
+      const outLine = document.createElement('div');
+      outLine.className = 'terminal-line';
+      outLine.innerHTML = `zsh: command not found: <span style="color: #ff5f56;">${escapeHTML(cmd)}</span>. Type <span class="cmd-highlight">help</span> for commands.`;
+      history.appendChild(outLine);
+    }
+
+    input.value = '';
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+  }
+
+  // Handle typing + enter
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      const rawInput = input.value.trim();
-      if (!rawInput) return;
-
-      const args = rawInput.split(' ');
-      const cmd = args[0].toLowerCase();
-      const param = args.slice(1).join(' ');
-
-      // Add executed command line
-      const cmdLine = document.createElement('div');
-      cmdLine.className = 'terminal-line';
-      cmdLine.innerHTML = `<span class="prompt-user">joy@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span class="prompt-char">$</span> ${escapeHTML(rawInput)}`;
-      history.appendChild(cmdLine);
-
-      // Handle output
-      if (cmd === 'clear') {
-        history.innerHTML = '';
-      } else if (cmd === 'echo') {
-        const outLine = document.createElement('div');
-        outLine.className = 'terminal-line';
-        outLine.textContent = param;
-        history.appendChild(outLine);
-      } else if (commands[cmd]) {
-        const outLine = document.createElement('div');
-        outLine.className = 'terminal-line';
-        outLine.innerHTML = commands[cmd]();
-        history.appendChild(outLine);
-      } else {
-        const outLine = document.createElement('div');
-        outLine.className = 'terminal-line';
-        outLine.innerHTML = `zsh: command not found: <span style="color: #ff5f56;">${escapeHTML(cmd)}</span>. Type <span class="cmd-highlight">help</span> for valid commands.`;
-        history.appendChild(outLine);
-      }
-
-      input.value = '';
-      terminalBody.scrollTop = terminalBody.scrollHeight;
+      executeCommand(input.value);
     }
   });
 
-  // Clicking anywhere in terminal body focuses the input
+  // Handle quick command chips (touch friendly)
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cmd = chip.getAttribute('data-cmd');
+      if (cmd) {
+        executeCommand(cmd);
+      }
+    });
+  });
+
   terminalBody.addEventListener('click', () => {
     input.focus();
   });
@@ -455,7 +482,6 @@ function initCopyEmail() {
         if (tooltip) tooltip.textContent = 'Copy';
       }, 2000);
     } catch {
-      // Fallback
       showToast(`Email: ${email}`);
     }
   });
@@ -471,29 +497,58 @@ function initCopyEmail() {
 }
 
 /* ==========================================================================
-   7. Navigation & Mobile Toggle
+   7. Mobile Navigation Drawer & Backdrop
    ========================================================================== */
-function initNavigation() {
+function initMobileDrawer() {
   const mobileToggle = document.getElementById('mobile-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('drawer-overlay');
+  const closeBtn = document.getElementById('drawer-close');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
 
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      const isOpen = navMenu.classList.toggle('mobile-open');
-      mobileToggle.setAttribute('aria-expanded', isOpen);
-    });
+  if (!mobileToggle || !drawer || !overlay) return;
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('mobile-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
+  function openDrawer() {
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    mobileToggle.classList.add('active');
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden'; // prevent background scrolling
   }
 
-  // Active link scroll spy
+  function closeDrawer() {
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+    mobileToggle.classList.remove('active');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  mobileToggle.addEventListener('click', () => {
+    if (drawer.classList.contains('active')) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+}
+
+/* ==========================================================================
+   8. Scroll Spy for Desktop Navbar
+   ========================================================================== */
+function initScrollSpy() {
+  const navLinks = document.querySelectorAll('.nav-links .nav-link');
   const sections = document.querySelectorAll('section[id]');
+
+  if (!navLinks.length || !sections.length) return;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

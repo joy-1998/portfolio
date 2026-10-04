@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Joy | Senior Software Engineer & Full Stack Architect</title>
   <meta name="description" content="Portfolio of Joy - Senior Software Engineer & Full Stack Developer specializing in distributed systems, scalable web architecture, and cloud infrastructure.">
   <meta name="keywords" content="Senior Software Engineer, Full Stack Developer, Distributed Systems, Cloud Architecture, Joy, GitHub Pages">
@@ -14,6 +14,9 @@
   <meta property="og:description" content="Senior Software Engineer specializing in resilient systems, microservices, and modern web applications.">
   <meta property="og:url" content="https://joy-1998.github.io/portfolio/">
   
+  <!-- Favicon placeholder svg -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +27,10 @@
 <body>
   <!-- Canvas interactive background -->
   <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Luminous Ambient Orbs for futuristic depth -->
+  <div class="ambient-orb orb-primary" aria-hidden="true"></div>
+  <div class="ambient-orb orb-secondary" aria-hidden="true"></div>
 
   <!-- Noise overlay for refined dark texture -->
   <div class="noise-overlay" aria-hidden="true"></div>
@@ -38,6 +45,7 @@
         <span class="brand-bracket">&lt;</span><span class="brand-name">JOY</span><span class="brand-accent">.DEV</span><span class="brand-bracket">/&gt;</span>
       </a>
 
+      <!-- Desktop Nav Links -->
       <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
         <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Stack</a>
@@ -62,14 +70,75 @@
     </div>
   </header>
 
+  <!-- Mobile Navigation Drawer / Overlay -->
+  <div class="mobile-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="drawer-header">
+      <div class="nav-brand">
+        <span class="brand-bracket">&lt;</span><span class="brand-name">JOY</span><span class="brand-accent">.DEV</span><span class="brand-bracket">/&gt;</span>
+      </div>
+      <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="drawer-status">
+      <span class="pulse-dot"></span>
+      <span>Available for Roles & Consulting</span>
+    </div>
+
+    <nav class="drawer-links">
+      <a href="#hero" class="drawer-link">
+        <span class="drawer-num">01</span>
+        <span>Overview</span>
+      </a>
+      <a href="#about" class="drawer-link">
+        <span class="drawer-num">02</span>
+        <span>Architecture Pillars</span>
+      </a>
+      <a href="#skills" class="drawer-link">
+        <span class="drawer-num">03</span>
+        <span>Technical Matrix</span>
+      </a>
+      <a href="#projects" class="drawer-link">
+        <span class="drawer-num">04</span>
+        <span>Flagship Systems</span>
+      </a>
+      <a href="#experience" class="drawer-link">
+        <span class="drawer-num">05</span>
+        <span>Career Milestones</span>
+      </a>
+      <a href="#terminal" class="drawer-link">
+        <span class="drawer-num">06</span>
+        <span>Interactive Terminal</span>
+      </a>
+      <a href="#contact" class="drawer-link highlight-link">
+        <span class="drawer-num">07</span>
+        <span>Contact Joy</span>
+      </a>
+    </nav>
+
+    <div class="drawer-footer">
+      <a href="https://github.com/joy-1998" target="_blank" rel="noopener noreferrer" class="drawer-social-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub Profile</span>
+      </a>
+      <a href="mailto:joyashwin1998@gmail.com" class="drawer-social-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>Email Dispatch</span>
+      </a>
+    </div>
+  </aside>
+
   <main id="main-content">
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
       <div class="hero-container">
-        <!-- Status Badge -->
-        <div class="status-pill glass-card animate-fade-in">
-          <span class="pulse-dot"></span>
-          <span class="status-text">Available for Senior Engineering Roles & Architecture Consulting</span>
+        <!-- Live System HUD Badge -->
+        <div class="system-hud-bar glass-card animate-fade-in">
+          <div class="hud-item"><span class="pulse-dot"></span> <span class="hud-label">STATUS:</span> <span class="hud-val text-emerald">READY</span></div>
+          <span class="hud-divider">|</span>
+          <div class="hud-item"><span class="hud-label">ROLE:</span> <span class="hud-val">SR. FULL STACK</span></div>
+          <span class="hud-divider">|</span>
+          <div class="hud-item"><span class="hud-label">LATENCY:</span> <span class="hud-val text-cyan">&lt;15ms</span></div>
         </div>
 
         <!-- Main Headline -->
@@ -102,25 +171,22 @@
           </a>
         </div>
 
-        <!-- Core Metric Counters -->
+        <!-- Core Metric Counters (Responsive 2x2 grid on mobile/tablet) -->
         <div class="metrics-grid glass-card animate-fade-in delay-5">
           <div class="metric-item">
-            <div class="metric-number"><span class="counter" data-target="99.99">99.99</span>%</div>
+            <div class="metric-number"><span class="counter">99.99</span>%</div>
             <div class="metric-label">System Availability Target</div>
           </div>
-          <div class="metric-divider"></div>
           <div class="metric-item">
-            <div class="metric-number"><span class="counter" data-target="50">50</span>k+</div>
+            <div class="metric-number"><span class="counter">50</span>k+</div>
             <div class="metric-label">Req/Sec Throughput Tuned</div>
           </div>
-          <div class="metric-divider"></div>
           <div class="metric-item">
-            <div class="metric-number">&lt;<span class="counter" data-target="25">25</span>ms</div>
+            <div class="metric-number">&lt;<span class="counter">25</span>ms</div>
             <div class="metric-label">p95 Latency Standards</div>
           </div>
-          <div class="metric-divider"></div>
           <div class="metric-item">
-            <div class="metric-number"><span class="counter" data-target="100">100</span>%</div>
+            <div class="metric-number"><span class="counter">100</span>%</div>
             <div class="metric-label">Automated CI/CD Quality</div>
           </div>
         </div>
@@ -193,18 +259,19 @@
           <p class="section-subtitle">A balanced toolkit cultivated across backend services, cloud platforms, and modern web environments.</p>
         </div>
 
-        <!-- Filter tabs -->
-        <div class="stack-filters" role="tablist">
-          <button class="filter-btn active" data-filter="all" role="tab">All Domains</button>
-          <button class="filter-btn" data-filter="languages" role="tab">Languages</button>
-          <button class="filter-btn" data-filter="backend" role="tab">Backend & Data</button>
-          <button class="filter-btn" data-filter="frontend" role="tab">Frontend</button>
-          <button class="filter-btn" data-filter="devops" role="tab">Cloud & DevOps</button>
+        <!-- Filter tabs (horizontally scrollable on mobile) -->
+        <div class="stack-filters-wrapper">
+          <div class="stack-filters" role="tablist">
+            <button class="filter-btn active" data-filter="all" role="tab">All Domains</button>
+            <button class="filter-btn" data-filter="languages" role="tab">Languages</button>
+            <button class="filter-btn" data-filter="backend" role="tab">Backend & Data</button>
+            <button class="filter-btn" data-filter="frontend" role="tab">Frontend</button>
+            <button class="filter-btn" data-filter="devops" role="tab">Cloud & DevOps</button>
+          </div>
         </div>
 
         <!-- Skills Grid -->
         <div class="stack-grid" id="stack-container">
-          <!-- Item -->
           <div class="skill-card glass-card" data-category="languages">
             <div class="skill-head">
               <div class="skill-meta">
@@ -261,7 +328,7 @@
               </div>
               <span class="skill-badge">RDBMS</span>
             </div>
-            <p class="skill-details">Query query planner optimization, indexing strategies (B-Tree, GIN, BRIN), schema partitioning, and pooling.</p>
+            <p class="skill-details">Query planner optimization, indexing strategies (B-Tree, GIN, BRIN), schema partitioning, and pooling.</p>
             <div class="skill-meter"><div class="meter-bar" style="width: 92%"></div></div>
           </div>
 
@@ -475,7 +542,6 @@
         </div>
 
         <div class="timeline-container">
-          <!-- Item 1 -->
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content glass-card">
@@ -493,7 +559,6 @@
             </div>
           </div>
 
-          <!-- Item 2 -->
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content glass-card">
@@ -511,7 +576,6 @@
             </div>
           </div>
 
-          <!-- Item 3 -->
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content glass-card">
@@ -531,13 +595,13 @@
       </div>
     </section>
 
-    <!-- Interactive Terminal Section -->
+    <!-- Interactive Terminal Section (Mobile-enhanced with quick command chips) -->
     <section id="terminal" class="section-padding">
       <div class="section-container">
         <div class="section-header">
           <div class="section-tag">CLI EXPERIENCE</div>
           <h2 class="section-title">Interactive Terminal</h2>
-          <p class="section-subtitle">For engineers who prefer the command line. Type commands below to inspect capabilities.</p>
+          <p class="section-subtitle">For engineers who prefer the command line. Tap any quick chip or type below to inspect.</p>
         </div>
 
         <div class="terminal-window glass-card">
@@ -549,18 +613,29 @@
             </div>
             <div class="terminal-title">joy@system-core:~ (zsh)</div>
             <div class="terminal-actions">
-              <span class="terminal-pill">Live Shell Emulator</span>
+              <span class="terminal-pill">Interactive v2.0</span>
             </div>
+          </div>
+
+          <!-- Quick Command Chips for Instant Touch Execution -->
+          <div class="terminal-quick-chips" aria-label="Terminal quick commands">
+            <span class="chip-label">Tap to run:</span>
+            <button class="term-chip" data-cmd="about">about</button>
+            <button class="term-chip" data-cmd="skills">skills</button>
+            <button class="term-chip" data-cmd="projects">projects</button>
+            <button class="term-chip" data-cmd="experience">experience</button>
+            <button class="term-chip" data-cmd="contact">contact</button>
+            <button class="term-chip" data-cmd="clear">clear</button>
           </div>
 
           <div class="terminal-body" id="terminal-body">
             <div class="terminal-line text-muted">Joy's Interactive Portfolio Shell v2.4</div>
-            <div class="terminal-line text-muted">Type <span class="cmd-highlight">help</span> to list available commands, or try <span class="cmd-highlight">skills</span>, <span class="cmd-highlight">projects</span>, <span class="cmd-highlight">contact</span>.</div>
+            <div class="terminal-line text-muted">Type <span class="cmd-highlight">help</span> or tap a chip above to inspect capabilities.</div>
             <div id="terminal-history"></div>
             
             <div class="terminal-prompt-line">
               <span class="prompt-user">joy@dev</span><span class="prompt-sep">:</span><span class="prompt-path">~</span><span class="prompt-char">$</span>
-              <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" autofocus aria-label="Terminal command prompt">
+              <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal command prompt">
             </div>
           </div>
         </div>
@@ -591,7 +666,7 @@
                   <span class="method-label">Direct Email</span>
                   <div class="copy-email-row">
                     <a href="mailto:joyashwin1998@gmail.com" class="method-value">joyashwin1998@gmail.com</a>
-                    <button id="copy-email-btn" class="copy-btn" title="Copy to clipboard">
+                    <button id="copy-email-btn" class="copy-btn" title="Copy to clipboard" aria-label="Copy email address">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                       <span id="copy-tooltip">Copy</span>
                     </button>
@@ -653,8 +728,9 @@
     </section>
   </main>
 
-  <!-- Interactive Architecture Modal -->
+  <!-- Interactive Architecture Modal (Bottom sheet on mobile) -->
   <dialog id="arch-modal" class="arch-modal glass-card" aria-labelledby="modal-title">
+    <div class="modal-touch-bar" aria-hidden="true"></div>
     <div class="modal-header">
       <h3 id="modal-title" class="modal-title">System Architecture Inspection</h3>
       <button id="close-modal-btn" class="modal-close" aria-label="Close dialog">&times;</button>
